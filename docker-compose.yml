@@ -1,0 +1,48 @@
+services:
+  web:
+    image: odoo:17.0
+    container_name: odooWebContainer
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: myodoo
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+
+  db:
+    image: postgres:15
+    container_name: postgresSQLContainer
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: myodoo
+      POSTGRES_USER: odoo
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    restart: unless-stopped
+    image: dpage/pgadmin4:latest
+    container_name: PgAdminContainer
+    depends_on:
+      - db
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: cr.m23@hotmail.com
+      PGADMIN_DEFAULT_PASSWORD: PgAdminPassword
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+  pgadmin-data:
