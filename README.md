@@ -96,3 +96,21 @@
 ***Creamos el server y nos saldra esto***
 
 ![Captura de pantalla 2025-01-15 gf](https://github.com/user-attachments/assets/eec28826-1163-4ade-9a25-b44034a2a238)
+
+
+
+- ***Preguntas***
+
+
+  ***¿Que ocurre si en el ordenador local el puerto 5432 está ocupado? ¿Y si lo estuviese el 8069? ¿Como puedes solucionarlo?***
+  
+  ```
+  Si el puerto está ocupado, el docker-compose.yml nos dará un error a la hora de levantar el servicio, ya que hemos indicado que vamos a usar ese puerto y nos dirá que ese puerto está siendo usado por otro servicio del ordenador.
+  ```
+
+  ***¿Y si lo estuviese el 8069? ¿Como puedes solucionarlo?***
+
+  ```
+  Si el puerto 8069 esta ocupado no podremos lanzar el contenedor de Odoo, ya que el puerto 8069 es el puerto por defecto de Odoo.
+  Para solucionarlo podemos cambiar el puerto de Odoo en el archivo docker-compose.yml, por ejemplo a 8070.
+  ```
